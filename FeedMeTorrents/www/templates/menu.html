@@ -1,0 +1,34 @@
+<!--
+Create tabs with an icon and label, using the tabs-stable style.
+Each tab's child <ion-nav-view> directive will have its own
+navigation history that also transitions its views in and out.
+-->
+
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-dark">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left" class="menu-dark dark-bg">
+        <ion-content class="dark-bg" overflow-scroll="true">
+                <h1 class="item item-dark item-body item-borderless text-center">FeedMe Torrents</h1>
+                <div class="item item-divider item-icon-left item-icon-right item-borderless item-dark"  ng-click="toggleTorrents()">
+                    <i class="icon {{showTorrents ? 'ion-arrow-down-b' : 'ion-arrow-right-b'}}"></i>
+                    Video
+                    <i class="icon ion-videocamera"></i>
+                </div>
+                <ion-list ng-show="showTorrents">
+                    <a menu-close class="item dark item-borderless" ng-repeat="category in categories" type="item-text-wrap" href="#/app/torrents" ng-click="searchTorrentsByCategory(category)">{{category.name}}</a>
+                </ion-list>
+            <a menu-close class="item item-divider item-borderless item-icon-right item-dark" href="#/app/settings">Settings <i class="icon ion-settings"></i></a>
+            <a menu-close class="item item-divider item-borderless item-icon-right item-dark" ng-click="refreshPlex()">Refresh Plex <i class="icon ion-android-arrow-dropright-circle"></i></a>
+            <a menu-close class="item item-divider item-borderless item-icon-right item-dark" ng-click="sendMail()">Run Mail Job<i class="icon ion-android-arrow-dropright-circle"></i></a>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

@@ -1,0 +1,56 @@
+<!--
+Create tabs with an icon and label, using the tabs-stable style.
+Each tab's child <ion-nav-view> directive will have its own
+navigation history that also transitions its views in and out.
+-->
+
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-dark">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left" class="menu-dark">
+        <ion-header-bar class="bar bar-header bar-dark">
+            <img src="img/HippoIcon.png" class="hippo-icon" />
+            <h1 class="title">FeedMe Facts</h1>
+        </ion-header-bar>
+        <ion-content class="stable-bg has-header" overflow-scroll="true">
+            <ion-list>
+                <div class="item item-divider item-stable item-icon-left item-icon-right"  ng-click="toggleFacts()">
+                    <i class="icon {{showFacts ? 'ion-arrow-down-b' : 'ion-arrow-right-b'}}"></i>
+                    Facts
+                    <i class="icon ion-information-circled"></i>
+                </div>
+                    <a menu-close href="#/app/facts" class="item item-light item-borderless" ng-show="showFacts">
+                        All Facts
+                    </a>
+                <div class="item item-divider item-stable item-icon-left item-icon-right item-borderless"  ng-click="toggleStats()">
+                    <i class="icon {{showStats ? 'ion-arrow-down-b' : 'ion-arrow-right-b'}}"></i>
+                    Statistics
+                    <i class="icon ion-stats-bars"></i>
+                </div>
+                <ion-list ng-show="showStats">
+                    <a menu-close class="item item-light item-borderless" ng-repeat="category in categories" type="item-text-wrap" href="#/app/stats" ng-click="searchStatsByCategory(category)">{{category}}</a>
+                </ion-list>
+                <div class="item item-divider item-stable item-icon-left item-icon-right item-borderless" ng-click="toggleTrivia()">
+                    <i class="icon {{showTrivia ? 'ion-arrow-down-b' : 'ion-arrow-right-b'}}"></i>
+                    Trivia
+                    <i class="icon ion-help-circled"></i>
+                </div>
+                <ion-list ng-show="showTrivia">
+                    <a menu-close href="#/app/trivia/0" class="item item-light" ng-click="setTriviaCategory(null)">
+                        Random
+                    </a>
+                    <a menu-close class="item item-light item-borderless" ng-repeat="category in triviaCategories" type="item-text-wrap" href="#/app/trivia/{{category.id}}" ng-click="setTriviaCategory(category)">{{category.name}}</a>
+                </ion-list>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

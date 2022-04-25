@@ -1,0 +1,58 @@
+﻿<ion-view view-title="Trivia" hide-nav-bar="true">
+    <ion-header-bar class="bar-header bar-dark" align-title="center">
+        <div class="button ion-button" ng-click="toggleLeft()">
+            <i class="icon ion-navicon"></i>
+        </div>
+        <h1 class="title" ng-click="scrollTop()">Trivia</h1>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true" ng-cloak>
+        <div class="spinner" ng-if="!StatsService.triviaList">
+            <ion-spinner icon="lines"></ion-spinner>
+            <p ng-if="!StatsService.triviaList">Loading {{StatsService.triviaList.length}}</p>
+        </div>
+        <div ng-hide="StatsService.triviaList == null">
+            <button class="button" ng-disabled="triviaCurrentPage == 0" ng-click="firstPage()">
+                First
+            </button>
+            <button class="button" ng-disabled="triviaCurrentPage == 0" ng-click="previousPage()">
+                Previous
+            </button>
+            <button class="button" ng-disabled="true">{{triviaCurrentPage+1}}/{{numberOfPages()}}</button>
+            <button class="button" ng-disabled="triviaCurrentPage >= StatsService.triviaList.length/pageSize - 1" ng-click="nextPage()">
+                Next
+            </button>
+            <button class="button" ng-disabled="triviaCurrentPage >= StatsService.triviaList.length/pageSize - 1" ng-click="lastPage()">
+                Last
+            </button>
+        </div>
+        <div ng-repeat="trivia in StatsService.triviaList | limitTo:pageSize:triviaCurrentPage*pageSize" class="card">
+            <div class="item item-body" ng-if="trivia.question">
+                <p>{{trivia.question}}</p>
+                <p> </p>
+                <div ng-if="trivia.showAnswer">
+                    <h3 class="ion-header ion-positive">Answer:</h3>
+                    <p ng-bind-html="::trivia.answer"></p>
+                </div>
+                <p> </p>
+                <div class="button ion-button" ng-click="toggleAnswer(trivia)">{{ trivia.showAnswer ? 'Hide Answer' : 'Show Answer'}}</div>
+                <div class="button ion-button ion-share" ng-click="shareAnywhere(trivia)"> share</div>
+            </div>
+        </div>
+        <div ng-hide="StatsService.triviaList == null">
+            <button class="button" ng-disabled="triviaCurrentPage == 0" ng-click="firstPage()">
+                First
+            </button>
+            <button class="button" ng-disabled="triviaCurrentPage == 0" ng-click="previousPage()">
+                Previous
+            </button>
+            <button class="button" ng-disabled="true">{{triviaCurrentPage+1}}/{{numberOfPages()}}</button>
+            <button class="button" ng-disabled="triviaCurrentPage >= StatsService.triviaList.length/pageSize - 1" ng-click="nextPage()">
+                Next
+            </button>
+            <button class="button" ng-disabled="triviaCurrentPage >= StatsService.triviaList.length/pageSize - 1" ng-click="lastPage()">
+                Last
+            </button>
+            <div class="item"></div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,9 @@
+﻿<div class="card list" ng-cloak="" ng-repeat="stat in StatsService.statsList track by stat.identifier">
+    <img ng-src="{{::stat.ImageUrl}}" style="width:100%; height: auto;" ng-click="openLink(stat.Link)" />
+    <div class="ion-header" ng-click="toggleDescription(stat)"><p ng-bind-html="stat.subject"></p><i class="ion-more" ng-if="!stat.showDescription"></i></div>
+    <div ng-if="stat.showDescription">
+        <h5 class="ion-header ion-positive">Description:</h5>
+        <p ng-bind-html="::stat.description | hrefToJS"></p>
+    </div>
+    <div class="button ion-button ion-share" ng-click="shareAnywhere(stat)" ng-hide="stat.subject === 'No Results'"> share</div>
+</div>

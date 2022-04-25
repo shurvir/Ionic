@@ -1,0 +1,22 @@
+﻿<div class="card" ng-cloak="" ng-repeat="torrent in TorrentsService.torrentsList">
+    <div class="card-body dark">
+        <ion-item class="item-body dark" ng-click="toggleDetail(torrent)">{{torrent.title}}</ion-item>
+        <div class="item item-borderless" ng-if="torrent.show">
+            <h2 class="positive">Category: </h2>
+            <p>{{torrent.category}}</p>
+            <h2 class="positive">Author :</h2>
+            <p> {{torrent.author}}</p>
+            <h2 class="positive">Content Length: </h2>
+            <p> {{torrent.contentLength/1024/1024 | number : 2}} MB</p>
+            <h2 class="positive">Published Date: </h2>
+            <p>{{torrent.pubDate | limitTo : 10 }}</p>
+            <h2 class="positive">Seeds: </h2>
+            <p> {{torrent.seeds}}</p>
+            <div class="item item-borderless" ng-if="torrent.title !== 'No Torrent Found'">
+                <button class="button ion-button button-calm" ng-click="openLink(torrent.link)">Magnet</button>
+                <button class="button ion-button button-calm" ng-click="openLink(torrent.HDlink)">HD Magnet</button>
+                <button class="button ion-button button-royal" ng-click="openLink(TorrentsService.torrentURL + '/AdduTorrent.php?torrent=' + torrent.link + '&amp;store=' +  (TorrentsService.torrentsList.saveLocation === undefined ? TorrentsService.savePath : TorrentsService.torrentsList.saveLocation))">uTorrent</button>
+            </div>
+        </div>
+    </div>
+</div>
